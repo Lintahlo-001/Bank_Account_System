@@ -1,12 +1,15 @@
+import java.text.DecimalFormat;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
+    static DecimalFormat df = new DecimalFormat("#,##0");
     
     static LinkedList<Users> users = new LinkedList<>();
     static Users customer;
+    static Admin admin = new Admin();
 
     public static void main(String[] args) {
         display();
@@ -26,35 +29,30 @@ public class Main {
                 switch (choice) {
                     
                     case 1:
-                        deleteAccount();
                         break;
                     case 2:
                         createAccount();
                         break;
                     case 3:
-                        displayAll();
+                        System.out.println();
+                        System.out.println("=================================");
+                        System.out.print("Enter Password: "); String adminPass = sc.next();
+
+                        if (adminCheck(adminPass)) {
+                            adminMenu(); 
+                        }
+                        else {
+                            System.out.println("Incorrect Password.\n");
+                        }
                         break;
                     case 4:
-                        String firstNameChecker;
-                        System.out.println("=================");
-                        System.out.print("Enter First Name: "); firstNameChecker = sc.next();
-                        
-                        int j = 0;
-                        for(Users temp:users){
-                            if (firstNameChecker.equals(temp.getFirstName()) && j < 10) {
-                                System.out.println("=================");
-                                System.out.println(temp.adminGetFullName());
-                                System.out.println(temp.getUserID());
-                                j++;
-                            }
-                        }
-                        System.out.println("None or no more results found");
+                        System.exit(0);
                         break;
                     default:
-                        System.out.println("\nInvalid Choice. Enter a number from 1-4.");
+                        System.out.println("\nInvalid Choice. Enter a number from 1-4.\n");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("\nInvalid Choice. Enter a number.");
+                System.out.println("\nInvalid Choice. Enter a number.\n");
                 sc.next(); 
             }
         }
@@ -94,8 +92,9 @@ public class Main {
         System.out.println("\t\t\t\t╠════════════════════════════╣");
         System.out.println("\t\t\t\t║ 1. Savings Account         ║");
         System.out.println("\t\t\t\t║ 2. Checking Account        ║");
-        System.out.println("\t\t\t\t║ 3. Credit Account          ║");
         System.out.println("\t\t\t\t╚════════════════════════════╝");
+        System.out.println("Minimum Initial Deposit:");
+        System.out.println("Savings: 3,000\nChecking: 10,000");
     }
 
     public static void accountSummaryDisplay() {
@@ -104,9 +103,25 @@ public class Main {
         System.out.println("\t\t\t\t╚════════════════════════════╝");
     }
 
+    public static void adminMenuDisplay() {
+        System.out.println("\t\t\t\t╔════════════════════════════╗");
+        System.out.println("\t\t\t\t║           Admin            ║");
+        System.out.println("\t\t\t\t╠════════════════════════════╣");
+        System.out.println("\t\t\t\t║ 1. Search                  ║");
+        System.out.println("\t\t\t\t║ 2. Display All Accounts    ║");
+        System.out.println("\t\t\t\t║ 3. Delete An Account       ║");
+        System.out.println("\t\t\t\t║ 4. Change Admin Password   ║");
+        System.out.println("\t\t\t\t║ 5. Return To Main Menu     ║");
+        System.out.println("\t\t\t\t╚════════════════════════════╝");
+    }
+
+    public static void searchOptions() {
+
+    }
+
     //Program Functions
     public static void createAccount() {
-        boolean notMatch = true; int type = 0; boolean invalid = true;
+        boolean notMatch = true; int type = 0; boolean invalid = true; double deposit = 0; boolean insufficient = true;
         createAccountMenu();
             
         System.out.println();
@@ -136,13 +151,31 @@ public class Main {
         }
         
         while (invalid) {
-            System.out.print("Choose Account Type (1-3): "); String check = sc.next();
+            System.out.print("Choose Account Type (1-2): "); String check = sc.next();
             if (check.equals("1") || check.equals("2")) {
                 type = Integer.parseInt(check);
                 invalid = false;
             } 
             else {
                 System.out.println("\nInvalid Input. Please Try Again.");
+            }
+        }
+        
+        while (minimumCheck(deposit, type)) {
+            insufficient = true;
+            try {
+                System.out.print("\nInput Initial Deposit: "); deposit = sc.nextDouble();
+            } catch (Exception e) {
+                System.out.println("Invalid Input. Only Enter Numbers.\n");
+                sc.next();
+                insufficient = false;
+            }
+
+            if (!minimumCheck(deposit, type)) {
+                break;
+            }
+            else if (insufficient) {
+                System.out.println("Invalid Amount. Please Try Again.");
             }
         }
         
@@ -153,6 +186,7 @@ public class Main {
         customer.setUsername(username);
         customer.setPassword(pass);
         customer.setAccountType(type);
+        customer.setInitialBalance(deposit);
 
         users.add(customer);
         System.out.println("\nAccount Successfully Created!");
@@ -163,21 +197,92 @@ public class Main {
         for(Users temp : users){
             if (firstName.equals(temp.getFirstName())) {
                 System.out.println("Account Number: " + temp.getUserID());
-                System.out.println("Account Name: " + temp.adminGetFullName());
+                System.out.println("Account Name: " + temp.getFullName());
                 System.out.println("Username: " + temp.getUsername());
                 System.out.println("Password: " + temp.getPassword());
                 System.out.println("Birth Date: " + temp.getBDay());
                 System.out.println("Phone Number: " + temp.getPhoneNumber());
                 System.out.println("Address: " + temp.getAddress());
                 System.out.println("Account Type: " + temp.displayType(temp.getAccountType()));
+                System.out.println("Balance: " + df.format(temp.getBalance()));
                 System.out.println();
             }
         }
     }
 
-    public static void adminCheck() {
-        System.out.println();
-        System.out.println("=================================");
+    public static boolean minimumCheck(double deposit, int type) {
+        if (type == 1) {
+            if (deposit >= 3000) {
+                return false;
+            }
+        } 
+        else if (type == 2) {
+            if (deposit >= 10000) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean adminCheck(String pass) {
+        if (pass.equals(admin.getPass())) {
+            System.out.println("Logged In!\n");
+            return true;
+        }
+
+        return false;
+    }
+
+    public static void adminMenu() {
+        boolean notMatch = true;
+        while (true) {
+            adminMenuDisplay();
+            System.out.println();
+            System.out.println("=================================");
+            
+            try {
+                System.out.print("Enter Choice: "); int choice = sc.nextInt();
+        
+                    switch (choice) {
+                        
+                        case 1:
+                            
+                            break;
+                        case 2:
+                            displayAll();
+                            break;
+                        case 3:
+                            deleteAccount();
+                            break;
+                        case 4:
+                            System.out.println();
+                            System.out.print("Enter New Password: "); String pass = sc.next();
+
+                            while (notMatch) {
+                                System.out.print("Re-Enter Your Password: "); String pass2 = sc.next();
+                    
+                                if (pass.equals(pass2)) {
+                                    System.out.println("\nPassword Changed!");
+                                    notMatch = false;
+                                } 
+                                else {
+                                    System.out.println("\nPasswords do not match. Please Try Again");
+                                } 
+                            }
+                            admin.setPass(pass);
+                            break;
+                        case 5:
+                            System.out.println();
+                            main();
+                            break;
+                        default:
+                            System.out.println("\nInvalid Choice. Enter a number from 1-5.\n");
+                    }
+            } catch (Exception e) {
+                System.out.println("\nInvalid Choice. Enter a number.\n");
+                sc.next(); 
+            }
+        }
     }
 
     public static void displayAll() {
@@ -191,13 +296,14 @@ public class Main {
             System.out.println("Phone Number: " + temp.getPhoneNumber());
             System.out.println("Address: " + temp.getAddress());
             System.out.println("Account Type: " + temp.displayType(temp.getAccountType()));
+            System.out.println("Balance: " + df.format(temp.getBalance()));
             System.out.println();
         }
 
         if (users.isEmpty()) {
             System.out.println();
             System.out.println("=================================");
-            System.out.println("No Accounts Found.");
+            System.out.println("No Accounts Found.\n");
         }
     }
 
@@ -210,6 +316,7 @@ public class Main {
             if (temp.getUserID().equals(accountNumber)) {
                 users.remove(i);
                 System.out.println("Account Deleted.");
+                System.out.println();
                 found = true;
                 break;
             }
@@ -217,6 +324,7 @@ public class Main {
     
         if (!found) {
             System.out.println("No Account Found with the given account number.");
+            System.out.println();
         }
     }
 }

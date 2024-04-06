@@ -1,5 +1,9 @@
 public class Admin {
-    private String password = "admin123";
+    private String password;
+
+    public Admin() {
+        password = "admin123";
+    }
     
     //Setters
     public void setPass(String pass) {
