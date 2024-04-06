@@ -112,9 +112,6 @@ public class Users extends FullName{
         else if (type == 2) {
             temp = "Checking Account";
         }
-        else if (type == 3) {
-            temp = "Credit Account";
-        }
         return temp;
     }
 }
