@@ -137,7 +137,7 @@ public class Main {
         
         while (invalid) {
             System.out.print("Choose Account Type (1-3): "); String check = sc.next();
-            if (check.equals("1") || check.equals("2") || check.equals("3")) {
+            if (check.equals("1") || check.equals("2")) {
                 type = Integer.parseInt(check);
                 invalid = false;
             } 
