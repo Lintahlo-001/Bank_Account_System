@@ -73,7 +73,7 @@ public class Main {
         System.out.println("\t\t\t\t╔════════════════════════════╗");
         System.out.println("\t\t\t\t║       Bank Main Menu       ║");
         System.out.println("\t\t\t\t╠════════════════════════════╣");
-        System.out.println("\t\t\t\t║ 1. Login                   ║");
+        System.out.println("\t\t\t\t║ 1. WIP                     ║");
         System.out.println("\t\t\t\t║ 2. Create New Account      ║");
         System.out.println("\t\t\t\t║ 3. Admin                   ║");
         System.out.println("\t\t\t\t║ 4. Exit                    ║");
@@ -109,19 +109,27 @@ public class Main {
         System.out.println("\t\t\t\t╠════════════════════════════╣");
         System.out.println("\t\t\t\t║ 1. Search                  ║");
         System.out.println("\t\t\t\t║ 2. Display All Accounts    ║");
-        System.out.println("\t\t\t\t║ 3. Delete An Account       ║");
+        System.out.println("\t\t\t\t║ 3. Manage Accounts         ║");
         System.out.println("\t\t\t\t║ 4. Change Admin Password   ║");
         System.out.println("\t\t\t\t║ 5. Return To Main Menu     ║");
         System.out.println("\t\t\t\t╚════════════════════════════╝");
     }
 
-    public static void searchOptions() {
-
+    public static void manageMenuDisplay() {
+        System.out.println("\t\t\t\t╔════════════════════════════╗");
+        System.out.println("\t\t\t\t║       Manage Accounts      ║");
+        System.out.println("\t\t\t\t╠════════════════════════════╣");
+        System.out.println("\t\t\t\t║ 1. Delete An Account       ║");
+        System.out.println("\t\t\t\t║ 2. Delete All Accounts     ║");
+        System.out.println("\t\t\t\t║ 3. Import Users(WIP)       ║");
+        System.out.println("\t\t\t\t║ 4. Export Users(WIP)       ║");
+        System.out.println("\t\t\t\t║ 5. Back                    ║");
+        System.out.println("\t\t\t\t╚════════════════════════════╝");
     }
 
     //Program Functions
     public static void createAccount() {
-        boolean notMatch = true; int type = 0; boolean invalid = true; double deposit = 0; boolean insufficient = true;
+        int type = 0; double deposit = 0; boolean insufficient = true;
         createAccountMenu();
             
         System.out.println();
@@ -137,24 +145,24 @@ public class Main {
         System.out.print("Create A Username: "); String username = sc.next();
         System.out.print("Create A Password: "); String pass = sc.next();
 
-        while (notMatch) {
+        while (true) {
             System.out.print("Re-Enter Your Password: "); String pass2 = sc.next();
 
             if (pass.equals(pass2)) {
                 System.out.println("\nPassword Created!");
                 typeOfAccount();
-                notMatch = false;
+                break;
             } 
             else {
                 System.out.println("\nPasswords do not match. Please Try Again");
             } 
         }
         
-        while (invalid) {
+        while (true) {
             System.out.print("Choose Account Type (1-2): "); String check = sc.next();
             if (check.equals("1") || check.equals("2")) {
                 type = Integer.parseInt(check);
-                invalid = false;
+                break;
             } 
             else {
                 System.out.println("\nInvalid Input. Please Try Again.");
@@ -175,7 +183,7 @@ public class Main {
                 break;
             }
             else if (insufficient) {
-                System.out.println("Invalid Amount. Please Try Again.");
+                System.out.println("Insufficient Amount. Please Try Again.");
             }
         }
         
@@ -234,7 +242,6 @@ public class Main {
     }
 
     public static void adminMenu() {
-        boolean notMatch = true;
         while (true) {
             adminMenuDisplay();
             System.out.println();
@@ -252,24 +259,11 @@ public class Main {
                             displayAll();
                             break;
                         case 3:
-                            deleteAccount();
+                            System.out.println();
+                            manageMenu();
                             break;
                         case 4:
-                            System.out.println();
-                            System.out.print("Enter New Password: "); String pass = sc.next();
-
-                            while (notMatch) {
-                                System.out.print("Re-Enter Your Password: "); String pass2 = sc.next();
-                    
-                                if (pass.equals(pass2)) {
-                                    System.out.println("\nPassword Changed!");
-                                    notMatch = false;
-                                } 
-                                else {
-                                    System.out.println("\nPasswords do not match. Please Try Again");
-                                } 
-                            }
-                            admin.setPass(pass);
+                            changeAdminPass();
                             break;
                         case 5:
                             System.out.println();
@@ -278,6 +272,42 @@ public class Main {
                         default:
                             System.out.println("\nInvalid Choice. Enter a number from 1-5.\n");
                     }
+            } catch (Exception e) {
+                System.out.println("\nInvalid Choice. Enter a number.\n");
+                sc.next(); 
+            }
+        }
+    }
+
+    public static void manageMenu() {
+        while (true) {
+            manageMenuDisplay();
+            System.out.println();
+            System.out.println("=================================");
+
+            try {
+                System.out.print("Enter Choice: "); int manageChoice = sc.nextInt();
+
+                switch (manageChoice) {
+
+                    case 1:
+                        deleteAccount();
+                        break;
+                    case 2:
+                        deleteAllAccounts();
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        System.out.println();
+                        adminMenu();
+                        break;
+                    default:
+                        System.out.println("\nInvalid Choice. Enter a number from 1-5.\n");
+                        break;
+                }
             } catch (Exception e) {
                 System.out.println("\nInvalid Choice. Enter a number.\n");
                 sc.next(); 
@@ -307,6 +337,37 @@ public class Main {
         }
     }
 
+    public static void changeAdminPass() {
+        System.out.println("\nChange Admin Password:");
+                            while (true) {
+                                System.out.println();
+                                System.out.print("Enter Current Password: "); String confirm = sc.next();
+                    
+                                if (admin.getPass().equals(confirm)) {
+                                    break;
+                                } 
+                                else {
+                                    System.out.println("Incorrect. Please Try Again.");
+                                } 
+                            }
+
+                            System.out.println();
+                            System.out.print("Enter New Password: "); String pass = sc.next();
+
+                            while (true) {
+                                System.out.print("Re-Enter New Password: "); String pass2 = sc.next();
+                    
+                                if (pass.equals(pass2)) {
+                                    System.out.println("\nPassword Changed!");
+                                    break;
+                                } 
+                                else {
+                                    System.out.println("\nPasswords do not match. Please Try Again");
+                                } 
+                            }
+                            admin.setPass(pass);
+    }
+
     public static void deleteAccount() {
         boolean found = false;
         System.out.print("Enter Account Number Of The Account To Delete: "); String accountNumber = sc.next();
@@ -326,5 +387,38 @@ public class Main {
             System.out.println("No Account Found with the given account number.");
             System.out.println();
         }
+    }
+
+    public static void deleteAllAccounts() {
+        while (true) {
+            System.out.print("Are You Sure You Want To Delete All Accounts? Answer [Y/N] : "); String choice = sc.next();
+
+            if (choice.equalsIgnoreCase("y")) {
+                System.out.println();
+                break;
+            }
+            else if (choice.equalsIgnoreCase("n")) {
+                System.out.println();
+                manageMenu();
+            }
+            else {
+                System.out.println("Invalid Input. Please Try Again.\n");
+            }
+        }
+
+        while (true) {
+            System.out.print("Enter Your Password: "); String confirm = sc.next();
+
+            if (admin.getPass().equals(confirm)) {
+                break;
+            } 
+            else {
+                System.out.println("Incorrect. Please Try Again.\n");
+            } 
+        }
+
+        users.clear();
+        System.out.println("\nAll Existing Accounts Deleted.");
+        System.out.println();
     }
 }
