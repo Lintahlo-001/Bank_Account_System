@@ -20,10 +20,13 @@ public class Main {
 
         while (true) {
             customer = new Users();
+            System.out.println();
             displayMenu();
         
             try {
-                System.out.print("Enter Here: ");
+                System.out.println();
+                System.out.println("=================================");
+                System.out.print("Enter Choice: ");
                 int choice = sc.nextInt();
     
                 switch (choice) {
@@ -61,75 +64,198 @@ public class Main {
     //Display Functions
     public static void display() {
         System.out.println("\r\n" + //
-        "██████╗░░█████╗░███╗░░██╗██╗░░██╗  ░█████╗░░█████╗░░█████╗░░█████╗░██╗░░░██╗███╗░░██╗████████╗\r\n" + //
-        "██╔══██╗██╔══██╗████╗░██║██║░██╔╝  ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║░░░██║████╗░██║╚══██╔══╝\r\n" + //
-        "██████╦╝███████║██╔██╗██║█████═╝░  ███████║██║░░╚═╝██║░░╚═╝██║░░██║██║░░░██║██╔██╗██║░░░██║░░░\r\n" + //
-        "██╔══██╗██╔══██║██║╚████║██╔═██╗░  ██╔══██║██║░░██╗██║░░██╗██║░░██║██║░░░██║██║╚████║░░░██║░░░\r\n" + //
-        "██████╦╝██║░░██║██║░╚███║██║░╚██╗  ██║░░██║╚█████╔╝╚█████╔╝╚█████╔╝╚██████╔╝██║░╚███║░░░██║░░░\r\n" + //
-        "╚═════╝░╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝  ╚═╝░░╚═╝░╚════╝░░╚════╝░░╚════╝░░╚═════╝░╚═╝░░╚══╝░░░╚═╝░░░");
+        "██████╗░░█████╗░███╗░░██╗░█████╗░░█████╗░   ██████╗░███████╗   ░█████╗░██████╗░░█████╗░░█████╗░░█████╗░███╗░░██╗\r\n" + //
+        "██╔══██╗██╔══██╗████╗░██║██╔══██╗██╔══██╗   ██╔══██╗██╔════╝   ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗████╗░██║\r\n" + //
+        "██████╦╝███████║██╔██╗██║██║░░╚═╝██║░░██║   ██║░░██║█████╗░░   ██║░░██║██████╔╝██║░░██║██║░░╚═╝███████║██╔██╗██║\r\n" + //
+        "██╔══██╗██╔══██║██║╚████║██║░░██╗██║░░██║   ██║░░██║██╔══╝░░   ██║░░██║██╔══██╗██║░░██║██║░░██╗██╔══██║██║╚████║\r\n" + //
+        "██████╦╝██║░░██║██║░╚███║╚█████╔╝╚█████╔╝   ██████╔╝███████╗   ╚█████╔╝██║░░██║╚█████╔╝╚█████╔╝██║░░██║██║░╚███║\r\n" + //
+        "╚═════╝░╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░░╚════╝░   ╚═════╝░╚══════╝   ░╚════╝░╚═╝░░╚═╝░╚════╝░░╚════╝░╚═╝░░╚═╝╚═╝░░╚══╝");
     }
 
     public static void displayMenu() {
-        System.out.println("\t\t\t\t╔════════════════════════════╗");
-        System.out.println("\t\t\t\t║       Bank Main Menu       ║");
-        System.out.println("\t\t\t\t╠════════════════════════════╣");
-        System.out.println("\t\t\t\t║ 1. WIP                     ║");
-        System.out.println("\t\t\t\t║ 2. Create New Account      ║");
-        System.out.println("\t\t\t\t║ 3. Admin                   ║");
-        System.out.println("\t\t\t\t║ 4. Exit                    ║");
-        System.out.println("\t\t\t\t╚════════════════════════════╝");
+        System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
+        System.out.println("\t\t\t\t\t\b\b\b║       Bank Main Menu       ║");
+        System.out.println("\t\t\t\t\t\b\b\b╠════════════════════════════╣");
+        System.out.println("\t\t\t\t\t\b\b\b║ 1. WIP                     ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 2. Create New Account      ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 3. Admin                   ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 4. Exit                    ║");
+        System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
     }
 
     public static void createAccountMenu() {
-        System.out.println("\t\t\t\t╔════════════════════════════╗");
-        System.out.println("\t\t\t\t║       Create Account       ║");
-        System.out.println("\t\t\t\t╚════════════════════════════╝");
+        System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
+        System.out.println("\t\t\t\t\t\b\b\b║       Create Account       ║");
+        System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
     }
 
     public static void typeOfAccount() {
-        System.out.println("\t\t\t\t╔════════════════════════════╗");
-        System.out.println("\t\t\t\t║    Choose your Account     ║");
-        System.out.println("\t\t\t\t╠════════════════════════════╣");
-        System.out.println("\t\t\t\t║ 1. Savings Account         ║");
-        System.out.println("\t\t\t\t║ 2. Checking Account        ║");
-        System.out.println("\t\t\t\t╚════════════════════════════╝");
-        System.out.println("Minimum Initial Deposit:");
-        System.out.println("Savings: 3,000\nChecking: 10,000");
+        System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
+        System.out.println("\t\t\t\t\t\b\b\b║     Choose Account Type    ║");
+        System.out.println("\t\t\t\t\t\b\b\b╠════════════════════════════╣");
+        System.out.println("\t\t\t\t\t\b\b\b║ 1. Savings Account         ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 2. Checking Account        ║");
+        System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
     }
 
     public static void accountSummaryDisplay() {
-        System.out.println("\t\t\t\t╔════════════════════════════╗");
-        System.out.println("\t\t\t\t║       Account Summary      ║");
-        System.out.println("\t\t\t\t╚════════════════════════════╝");
+        System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
+        System.out.println("\t\t\t\t\t\b\b\b║       Account Summary      ║");
+        System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
     }
 
     public static void adminMenuDisplay() {
-        System.out.println("\t\t\t\t╔════════════════════════════╗");
-        System.out.println("\t\t\t\t║           Admin            ║");
-        System.out.println("\t\t\t\t╠════════════════════════════╣");
-        System.out.println("\t\t\t\t║ 1. Search                  ║");
-        System.out.println("\t\t\t\t║ 2. Display All Accounts    ║");
-        System.out.println("\t\t\t\t║ 3. Manage Accounts         ║");
-        System.out.println("\t\t\t\t║ 4. Change Admin Password   ║");
-        System.out.println("\t\t\t\t║ 5. Return To Main Menu     ║");
-        System.out.println("\t\t\t\t╚════════════════════════════╝");
+        System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
+        System.out.println("\t\t\t\t\t\b\b\b║           Admin            ║");
+        System.out.println("\t\t\t\t\t\b\b\b╠════════════════════════════╣");
+        System.out.println("\t\t\t\t\t\b\b\b║ 1. Search                  ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 2. Display All Accounts    ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 3. Manage Accounts         ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 4. Change Admin Password   ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 5. Return To Main Menu     ║");
+        System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
     }
 
     public static void manageMenuDisplay() {
-        System.out.println("\t\t\t\t╔════════════════════════════╗");
-        System.out.println("\t\t\t\t║       Manage Accounts      ║");
-        System.out.println("\t\t\t\t╠════════════════════════════╣");
-        System.out.println("\t\t\t\t║ 1. Delete An Account       ║");
-        System.out.println("\t\t\t\t║ 2. Delete All Accounts     ║");
-        System.out.println("\t\t\t\t║ 3. Import Users(WIP)       ║");
-        System.out.println("\t\t\t\t║ 4. Export Users(WIP)       ║");
-        System.out.println("\t\t\t\t║ 5. Back                    ║");
-        System.out.println("\t\t\t\t╚════════════════════════════╝");
+        System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
+        System.out.println("\t\t\t\t\t\b\b\b║       Manage Accounts      ║");
+        System.out.println("\t\t\t\t\t\b\b\b╠════════════════════════════╣");
+        System.out.println("\t\t\t\t\t\b\b\b║ 1. Delete An Account       ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 2. Delete All Accounts     ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 3. Import Users(WIP)       ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 4. Export Users(WIP)       ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 5. Back                    ║");
+        System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
+    }
+
+    public static void searchMenuDisplay() {
+        System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
+        System.out.println("\t\t\t\t\t\b\b\b║       Search Options       ║");
+        System.out.println("\t\t\t\t\t\b\b\b╠════════════════════════════╣");
+        System.out.println("\t\t\t\t\t\b\b\b║ 1. Account Number          ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 2. Last Name               ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 3. First Name              ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 4. Account Type            ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 5. Back                    ║");
+        System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
+    }
+
+    //Menu Functions
+    public static void adminMenu() {
+        while (true) {
+            adminMenuDisplay();
+            System.out.println();
+            System.out.println("=================================");
+            
+            try {
+                System.out.print("Enter Choice: "); int choice = sc.nextInt();
+        
+                    switch (choice) {
+                        
+                        case 1:
+                            searchMenu();
+                            break;
+                        case 2:
+                            displayAll();
+                            break;
+                        case 3:
+                            System.out.println();
+                            manageMenu();
+                            break;
+                        case 4:
+                            changeAdminPass();
+                            break;
+                        case 5:
+                            main();
+                            break;
+                        default:
+                            System.out.println("\nInvalid Choice. Enter a number from 1-5.\n");
+                    }
+            } catch (Exception e) {
+                System.out.println("\nInvalid Choice. Enter a number.\n");
+                sc.next(); 
+            }
+        }
+    }
+    
+    public static void searchMenu() {
+        while (true) {
+            searchMenuDisplay();
+            System.out.println();
+            System.out.println("=================================");
+
+            try {
+                System.out.print("Enter Choice: "); int choice = sc.nextInt();
+
+                switch (choice) {
+
+                    case 1:
+                        searchAccount(1);
+                        break;
+                    case 2:
+                        searchAccount(2);
+                        break;
+                    case 3:
+                        searchAccount(3);
+                        break;
+                    case 4:
+                        searchAccount(4);
+                        break;
+                    case 5:
+                        System.out.println();
+                        adminMenu();
+                        break;
+                    default:
+                        System.out.println("\nInvalid Choice. Enter a number from 1-5.\n");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("\nInvalid Choice. Enter a number.\n");
+                sc.next(); 
+            }
+        }
+    }
+
+    public static void manageMenu() {
+        while (true) {
+            manageMenuDisplay();
+            System.out.println();
+            System.out.println("=================================");
+
+            try {
+                System.out.print("Enter Choice: "); int choice = sc.nextInt();
+
+                switch (choice) {
+
+                    case 1:
+                        deleteAccount();
+                        break;
+                    case 2:
+                        deleteAllAccounts();
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        System.out.println();
+                        adminMenu();
+                        break;
+                    default:
+                        System.out.println("\nInvalid Choice. Enter a number from 1-5.\n");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("\nInvalid Choice. Enter a number.\n");
+                sc.next(); 
+            }
+        }
     }
 
     //Program Functions
     public static void createAccount() {
         int type = 0; double deposit = 0; boolean insufficient = true;
+        System.out.println();
         createAccountMenu();
             
         System.out.println();
@@ -151,6 +277,8 @@ public class Main {
             if (pass.equals(pass2)) {
                 System.out.println("\nPassword Created!");
                 typeOfAccount();
+                System.out.println("Minimum Initial Deposit:");
+                System.out.println("Savings: 3,000\nChecking: 10,000\n");
                 break;
             } 
             else {
@@ -165,7 +293,7 @@ public class Main {
                 break;
             } 
             else {
-                System.out.println("\nInvalid Input. Please Try Again.");
+                System.out.println("Invalid Input. Please Try Again.\n");
             }
         }
         
@@ -174,7 +302,7 @@ public class Main {
             try {
                 System.out.print("\nInput Initial Deposit: "); deposit = sc.nextDouble();
             } catch (Exception e) {
-                System.out.println("Invalid Input. Only Enter Numbers.\n");
+                System.out.println("Invalid Input. Enter Numbers Only.");
                 sc.next();
                 insufficient = false;
             }
@@ -203,16 +331,17 @@ public class Main {
         accountSummaryDisplay();
 
         for(Users temp : users){
-            if (firstName.equals(temp.getFirstName())) {
-                System.out.println("Account Number: " + temp.getUserID());
-                System.out.println("Account Name: " + temp.getFullName());
-                System.out.println("Username: " + temp.getUsername());
-                System.out.println("Password: " + temp.getPassword());
-                System.out.println("Birth Date: " + temp.getBDay());
-                System.out.println("Phone Number: " + temp.getPhoneNumber());
-                System.out.println("Address: " + temp.getAddress());
-                System.out.println("Account Type: " + temp.displayType(temp.getAccountType()));
-                System.out.println("Balance: " + df.format(temp.getBalance()));
+            if (customer.getUserID().equals(temp.getUserID())) {
+                System.out.println();
+                System.out.println("\t\t\t\t\t\b\b\bAccount Number: " + temp.getUserID());
+                System.out.println("\t\t\t\t\t\b\b\bAccount Name: " + temp.getFullName());
+                System.out.println("\t\t\t\t\t\b\b\bUsername: " + temp.getUsername());
+                System.out.println("\t\t\t\t\t\b\b\bPassword: " + temp.getPassword());
+                System.out.println("\t\t\t\t\t\b\b\bBirth Date: " + temp.getBDay());
+                System.out.println("\t\t\t\t\t\b\b\bPhone Number: " + temp.getPhoneNumber());
+                System.out.println("\t\t\t\t\t\b\b\bAddress: " + temp.getAddress());
+                System.out.println("\t\t\t\t\t\b\b\bAccount Type: " + temp.displayType(temp.getAccountType()));
+                System.out.println("\t\t\t\t\t\b\b\bCurrent Balance: " + df.format(temp.getBalance()));
                 System.out.println();
             }
         }
@@ -241,77 +370,72 @@ public class Main {
         return false;
     }
 
-    public static void adminMenu() {
-        while (true) {
-            adminMenuDisplay();
-            System.out.println();
-            System.out.println("=================================");
-            
-            try {
-                System.out.print("Enter Choice: "); int choice = sc.nextInt();
-        
-                    switch (choice) {
-                        
-                        case 1:
-                            
-                            break;
-                        case 2:
-                            displayAll();
-                            break;
-                        case 3:
-                            System.out.println();
-                            manageMenu();
-                            break;
-                        case 4:
-                            changeAdminPass();
-                            break;
-                        case 5:
-                            System.out.println();
-                            main();
-                            break;
-                        default:
-                            System.out.println("\nInvalid Choice. Enter a number from 1-5.\n");
-                    }
-            } catch (Exception e) {
-                System.out.println("\nInvalid Choice. Enter a number.\n");
-                sc.next(); 
+    public static void searchAccount(int option) {
+        boolean found = false;
+        System.out.println();
+
+        if (option == 1) {
+            System.out.print("Enter Account Number: "); String accountNumber = sc.next();
+    
+            for (Users temp : users) {
+                if (accountNumber.equals(temp.getUserID())) {
+                    printAccountDetails(temp);
+                    found = true;
+                    break;
+                }
+            }
+        } 
+        else if (option == 2) {
+            System.out.print("Enter Last Name: "); String lastName = sc.next();
+    
+            for (Users temp : users) {
+                if (lastName.toLowerCase().equals(temp.getLastName().toLowerCase())) {
+                    printAccountDetails(temp);
+                    found = true;
+                    break;
+                }
             }
         }
-    }
+        else if (option == 3) {
+            System.out.print("Enter First Name: "); String firstName = sc.next();
+    
+            for (Users temp : users) {
+                if (firstName.toLowerCase().equals(temp.getFirstName().toLowerCase())) {
+                    printAccountDetails(temp);
+                    found = true;
+                    break;
+                }
+            }
+        }
+        else if (option == 4) {
+            int type = 0;
+            typeOfAccount();
+            System.out.println();
+            
+            while (true) {
+                System.out.print("Choose Account Type (1-2): "); String check = sc.next();
+                if (check.equals("1") || check.equals("2")) {
+                    type = Integer.parseInt(check);
+                    break;
+                } 
+                else {
+                    System.out.println("Invalid Input. Please Try Again.\n");
+                }
+            }
 
-    public static void manageMenu() {
-        while (true) {
-            manageMenuDisplay();
+            for (Users temp : users) {
+                if (type == temp.getAccountType()) {
+                    printAccountDetails(temp);
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (!found) {
             System.out.println();
             System.out.println("=================================");
-
-            try {
-                System.out.print("Enter Choice: "); int manageChoice = sc.nextInt();
-
-                switch (manageChoice) {
-
-                    case 1:
-                        deleteAccount();
-                        break;
-                    case 2:
-                        deleteAllAccounts();
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        System.out.println();
-                        adminMenu();
-                        break;
-                    default:
-                        System.out.println("\nInvalid Choice. Enter a number from 1-5.\n");
-                        break;
-                }
-            } catch (Exception e) {
-                System.out.println("\nInvalid Choice. Enter a number.\n");
-                sc.next(); 
-            }
+            System.out.println("No Accounts Found.\n");
         }
     }
 
@@ -321,13 +445,11 @@ public class Main {
             System.out.println("=================================");
             System.out.println("Account Number: " + temp.getUserID());
             System.out.println("Account Name: " + temp.adminGetFullName());
-            System.out.println("Username: " + temp.getUsername());
             System.out.println("Birth Date: " + temp.getBDay());
             System.out.println("Phone Number: " + temp.getPhoneNumber());
             System.out.println("Address: " + temp.getAddress());
             System.out.println("Account Type: " + temp.displayType(temp.getAccountType()));
-            System.out.println("Balance: " + df.format(temp.getBalance()));
-            System.out.println();
+            System.out.println("Current Balance: " + df.format(temp.getBalance()));
         }
 
         if (users.isEmpty()) {
@@ -420,5 +542,17 @@ public class Main {
         users.clear();
         System.out.println("\nAll Existing Accounts Deleted.");
         System.out.println();
+    }
+
+    public static void printAccountDetails(Users user) {
+        System.out.println();
+        System.out.println("=================================");
+        System.out.println("Account Number: " + user.getUserID());
+        System.out.println("Account Name: " + user.adminGetFullName());
+        System.out.println("Birth Date: " + user.getBDay());
+        System.out.println("Phone Number: " + user.getPhoneNumber());
+        System.out.println("Address: " + user.getAddress());
+        System.out.println("Account Type: " + user.displayType(user.getAccountType()));
+        System.out.println("Current Balance: " + df.format(user.getBalance()));
     }
 }

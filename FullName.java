@@ -5,7 +5,7 @@ public class FullName {
 	
 	public FullName() {
 		this.firstName = "Dummy First Name";
-		this.middleName = "DummyMiddleName";
+		this.middleName = "Dummy MiddleName";
 		this.lastName = "Dummy LastName";
 	}
 	

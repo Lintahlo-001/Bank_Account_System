@@ -75,6 +75,10 @@ public class Users extends FullName{
         return this.userFullName.getFirstName();
     }
 
+    public String getLastName() {
+        return this.userFullName.getLastName();
+    }
+
     public String getBDay() {
         return this.birthDate;
     }
