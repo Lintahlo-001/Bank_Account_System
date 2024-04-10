@@ -1,4 +1,4 @@
-public class Users extends FullName{
+public class Users extends FullName {
     public String accountNumber;
     public FullName userFullName;
     public String birthDate;
@@ -7,7 +7,7 @@ public class Users extends FullName{
     public int accountType;
     public String username;
     public String password;
-    public double initialBalance;
+    public double balance;
 
     public Users() {
         this.accountNumber = ID_Generator.randomUserID();
@@ -18,10 +18,14 @@ public class Users extends FullName{
         this.accountType = 0;
         this.username = "";
         this.password = "";
-        this.initialBalance = 0;
+        this.balance = 0;
     }
 
-    //Setters
+    // Setters
+    public void setUserID(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
     public void setFullName(String fName, String mName, String lName) {
         this.userFullName.setFirstName(fName);
         this.userFullName.setMiddleName(mName);
@@ -40,8 +44,8 @@ public class Users extends FullName{
         this.address = address;
     }
 
-    public void setInitialBalance(double balance) {
-        this.initialBalance = balance;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public void setAccountType(int type) {
@@ -56,18 +60,14 @@ public class Users extends FullName{
         this.password = pass;
     }
 
-    //Getters
+    // Getters
     public String getUserID() {
         return this.accountNumber;
     }
 
     public String getFullName() {
-        String temp = this.userFullName.getLastName() + ", " + this.userFullName.getFirstName() + " " + this.userFullName.getMiddleInitial();
-        return temp;
-    }
-
-    public String adminGetFullName() {
-        String temp = this.userFullName.getLastName() + ", " + this.userFullName.getFirstName() + " " + this.userFullName.getMiddleName();
+        String temp = this.userFullName.getLastName() + ", " + this.userFullName.getFirstName() + " "
+                + this.userFullName.getMiddleName();
         return temp;
     }
 
@@ -77,6 +77,10 @@ public class Users extends FullName{
 
     public String getLastName() {
         return this.userFullName.getLastName();
+    }
+
+    public String getMiddleName() {
+        return this.userFullName.getMiddleName();
     }
 
     public String getBDay() {
@@ -92,7 +96,7 @@ public class Users extends FullName{
     }
 
     public double getBalance() {
-        return this.initialBalance;
+        return this.balance;
     }
 
     public int getAccountType() {
@@ -107,13 +111,12 @@ public class Users extends FullName{
         return this.password;
     }
 
-    //Methods
+    // Methods
     public String displayType(int type) {
         String temp = "";
         if (type == 1) {
             temp = "Savings Account";
-        }
-        else if (type == 2) {
+        } else if (type == 2) {
             temp = "Checking Account";
         }
         return temp;

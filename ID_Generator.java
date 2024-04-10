@@ -6,20 +6,18 @@ public class ID_Generator {
 	final static HashSet<String> identifiers = new HashSet<String>();
 
 	public static String randomUserID() {
-	    StringBuilder builder = new StringBuilder();
-	    while(builder.toString().length() == 0) {
-	        int length = 10;
-	        for(int i = 0; i < length; i++) {
-	            builder.append(lexicon.charAt(rand.nextInt(lexicon.length())));
-	        }
-	        if(identifiers.contains(builder.toString())) {
-				//Resets builder if not unique
-	            builder = new StringBuilder();
-	        } 
-            else {
-                identifiers.add(builder.toString());
-            }
-	    }
-	    return builder.toString();
+		StringBuilder builder = new StringBuilder();
+		while (builder.toString().length() == 0) {
+			int length = 10;
+			for (int i = 0; i < length; i++) {
+				builder.append(lexicon.charAt(rand.nextInt(lexicon.length())));
+			}
+			if (identifiers.contains(builder.toString())) {
+				builder = new StringBuilder();
+			} else {
+				identifiers.add(builder.toString());
+			}
+		}
+		return builder.toString();
 	}
 }
