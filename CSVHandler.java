@@ -2,14 +2,19 @@ import java.io.*;
 import java.util.*;
 
 public class CSVHandler {
-    public static LinkedList<Users> readUsersFromCSV (String filename) {
+
+    // Method to read users from a CSV file and return a list of Users
+    public static LinkedList<Users> readUsersFromCSV(String filename) {
         LinkedList<Users> users = new LinkedList<>();
 
         try (Scanner scanner = new Scanner(new File(filename))) {
+            // Read each line from the CSV file
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String [] fields = line.split(",");
+                // Split the line into fields using comma as delimiter
+                String[] fields = line.split(",");
 
+                // Extracting individual fields from the array
                 String accountNumber = fields[0];
                 String firstName = fields[1];
                 String middleName = fields[2];
@@ -22,6 +27,7 @@ public class CSVHandler {
                 int accountType = Integer.parseInt(fields[9]);
                 double initialBalance = Double.parseDouble(fields[10]);
 
+                // Create a new Users object and set its properties
                 Users user = new Users();
                 user.setUserID(accountNumber);
                 user.setFullName(firstName, middleName, lastName);
@@ -32,6 +38,7 @@ public class CSVHandler {
                 user.setUsername(username);
                 user.setPassword(password);
                 user.setBalance(initialBalance);
+
                 users.add(user);
             }
         } catch (FileNotFoundException e) {
@@ -41,8 +48,10 @@ public class CSVHandler {
         return users;
     }
 
+    // Method to write users to a CSV file
     public static void writeUsersToCSV(String filename, LinkedList<Users> users) {
         try (PrintWriter writer = new PrintWriter(new File(filename))) {
+            // Iterate over each user and write their information to the CSV file
             for (Users user : users) {
                 String line = userToCSVLine(user);
                 writer.println(line);
@@ -52,6 +61,7 @@ public class CSVHandler {
         }
     }
 
+    // Method to convert a User object to a CSV formatted line
     private static String userToCSVLine(Users user) {
         return user.getUserID() + "," + user.getFirstName() + "," + user.getMiddleName() + "," + user.getLastName()
                 + "," + user.getBDay() + "," + user.getPhoneNumber() + ","

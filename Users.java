@@ -111,7 +111,7 @@ public class Users extends FullName {
         return this.password;
     }
 
-    // Methods
+    // Displays the account type
     public String displayType(int type) {
         String temp = "";
         if (type == 1) {

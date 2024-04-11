@@ -5,12 +5,12 @@ public class Admin {
         password = "admin123";
     }
     
-    //Setters
+    // Setters
     public void setPass(String pass) {
         this.password = pass;
     }
 
-    //Getters
+    // Getters
     public String getPass() {
         return this.password;
     }
