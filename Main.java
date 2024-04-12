@@ -172,6 +172,27 @@ public class Main {
         System.out.println("\t\t\t\t\t\b\b\bBirth Date: " + displayBirthDate(user.getBDay()));
         System.out.println("\t\t\t\t\t\b\b\bPhone Number: " + user.getPhoneNumber());
         System.out.println("\t\t\t\t\t\b\b\bAddress: " + user.getAddress());
+        System.out.println();
+        System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
+        System.out.println("\t\t\t\t\t\b\b\b║           Options          ║");
+        System.out.println("\t\t\t\t\t\b\b\b╠════════════════════════════╣");
+        System.out.println("\t\t\t\t\t\b\b\b║ 1. Edit Details            ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 2. Back                    ║");
+        System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
+    }
+
+    public static void editDetailsDisplay() {
+        System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
+        System.out.println("\t\t\t\t\t\b\b\b║            Edit            ║");
+        System.out.println("\t\t\t\t\t\b\b\b╠════════════════════════════╣");
+        System.out.println("\t\t\t\t\t\b\b\b║ 1. Account Name            ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 2. Username                ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 3. Password                ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 4. Birth Date              ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 5. Phone Number            ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 6. Address                 ║");
+        System.out.println("\t\t\t\t\t\b\b\b║ 7. Back                    ║");
+        System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
     }
 
     public static void passwordRequirementsDisplay(){
@@ -233,13 +254,55 @@ public class Main {
 
                     case 1:
                         System.out.println();
-                        searchMenu();
+                        editMenu(user);
                         break;
                     case 2:
                         userMenu(user);
                         break;
                     default:
                         System.out.println("\nInvalid Choice. Enter a number from 1-2.\n");
+                }
+            } catch (Exception e) {
+                System.out.println("\nInvalid Choice. Enter a number.\n");
+                sc.next();
+            }
+        }
+    }
+
+    public static void editMenu(Users user) {
+        while (true) {
+            editDetailsDisplay();
+            System.out.println();
+            System.out.println("=================================");
+
+            try {
+                System.out.print("Enter Choice: "); int choice = sc.nextInt(); sc.nextLine();
+
+                switch (choice) {
+
+                    case 1:
+                        editDetails(user, "Name");
+                        break;
+                    case 2:
+                        editDetails(user, "Username");
+                        break;
+                    case 3:
+                        editDetails(user, "Password");
+                        break;
+                    case 4:
+                        editDetails(user, "Birth Date");
+                        break;
+                    case 5:
+                        editDetails(user, "Phone Number");
+                        break;
+                    case 6:
+                        editDetails(user, "Address");
+                        break;
+                    case 7:
+                        System.out.println();
+                        detailsMenu(user);
+                    default:
+                        System.out.println("\nInvalid Choice. Enter a number from 1-7.\n");
                 }
             } catch (Exception e) {
                 System.out.println("\nInvalid Choice. Enter a number.\n");
@@ -406,7 +469,7 @@ public class Main {
             }
         }
 
-        String pass = getPassword("Password");
+        String pass = getPassword();
 
         typeOfAccount();
         System.out.println("Minimum Initial Deposit:");
@@ -703,6 +766,7 @@ public class Main {
         double temp = user.getBalance() + amount;
         user.setBalance(temp);
         System.out.println("Success!");
+        System.out.println();
         CSVHandler.writeUsersToCSV("users.csv", users);
         optionsDisplay();
     }
@@ -730,6 +794,7 @@ public class Main {
                 double temp = user.getBalance() - amount;
                 user.setBalance(temp);
                 System.out.println("Success!");
+                System.out.println();
                 CSVHandler.writeUsersToCSV("users.csv", users);
                 optionsDisplay();
                 break;
@@ -741,7 +806,7 @@ public class Main {
         String input;
         while (true) {
             input = sc.nextLine();
-            if (input.matches("[a-zA-Z]+")) {
+            if (input.matches("[a-zA-Z\\s]+")) {
                 return input;
             } else {
                 System.out.println("Invalid Input. Please Enter Only Alphabetical Characters.\n");
@@ -758,10 +823,10 @@ public class Main {
                 return input;
             } else if (!input.matches("[0-9]+")) {
                 System.out.println("Invalid Input. Please Enter Only Numerical Digits.\n");
-                System.out.print("Enter Phone Number: ");
+                System.out.print("Enter " + requirement + ": ");
             }  else if (input.length() != 11) {
                 System.out.println("Invalid Input. Please Enter Exactly 11 Numbers.\n");
-                System.out.print("Enter Phone Number: ");
+                System.out.print("Enter " + requirement + ": ");
             }
         }
     }
@@ -774,15 +839,15 @@ public class Main {
                 return input;
             } else if (!input.matches("[0-9]+")) {
                 System.out.println("Invalid Input. Please Enter Only Numerical Digits.\n");
-                System.out.print("Enter Birth Date (DD/MM/YYYY): ");
+                System.out.print("Enter " + requirement + " (DD/MM/YYYY): ");
             }  else if (input.length() != 8) {
                 System.out.println("Invalid Input. Please Enter Exactly 8 Numbers\n");
-                System.out.print("Enter Birth Date (DD/MM/YYYY): ");
+                System.out.print("Enter " + requirement + " (DD/MM/YYYY): ");
             }
         }
     }
 
-    public static String getPassword(String requirement) {
+    public static String getPassword() {
 
 		char [] specialCharacters = {'!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'};
 
@@ -849,5 +914,50 @@ public class Main {
         }
     
         return birthday.toString();
+    }
+
+    public static void editDetails(Users user, String option) {
+        System.out.println();
+        
+        if (option.equals("Name")) {
+            System.out.println("=================================");
+            System.out.println("Please complete the following\n");
+            System.out.print("Enter First Name: "); String firstName = getStringInput("First Name");
+            System.out.print("Enter Middle Name: "); String middleName = getStringInput("Middle Name");
+            System.out.print("Enter Last Name: "); String lastName = getStringInput("Last Name");
+            user.setFullName(firstName, middleName, lastName);
+            System.out.println(option + " Changed Successfully!");
+        } else if (option.equals("Username")) {
+            while (true) {
+                System.out.print("Create A Username: "); String username = sc.nextLine();
+    
+                if (!Login.checkUsername(username)) {
+                    user.setUsername(username);
+                    break;
+                } else {
+                    System.out.println("Username Already Exist.\n");
+                }
+            }
+            System.out.println(option + " Changed Successfully!");
+        } else if (option.equals("Password")) {
+            String pass = getPassword();
+            user.setPassword(pass);
+            System.out.println(option + " Changed Successfully!");
+        } else if (option.equals("Birth Date")) {
+            System.out.print("Enter Birth Date (DD/MM/YYYY): "); String birthDate = getBirthDate("Birth Date");
+            user.setBDay(birthDate);
+            System.out.println(option + " Changed Successfully!");
+        } else if (option.equals("Phone Number")) {
+            System.out.print("Enter Phone Number (09********): "); String phoneNumber = getPhoneNumber("Phone Number");
+            user.setPhoneNumber(phoneNumber);
+            System.out.println(option + " Changed Successfully!");
+        } else if (option.equals("Address")) {
+            System.out.print("Enter Address: "); String address = sc.nextLine();
+            user.setAddress(address);
+            System.out.println(option + " Changed Successfully!");
+        }
+
+        System.out.println();
+        CSVHandler.writeUsersToCSV("users.csv", users);
     }
 }
