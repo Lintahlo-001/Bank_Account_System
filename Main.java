@@ -20,7 +20,7 @@ public class Main {
     public static void main() {
 
         while (true) {
-            customer = new Users();
+            customer = new Users(); // Initializes customer object
             System.out.println();
             displayMenu();
 
@@ -62,7 +62,9 @@ public class Main {
         }
     }
 
-    // Display Functions
+
+    // Display Functions - displays the different menus and the corresponding options available
+
     public static void display() {
         System.out.println("\r\n" + //
                 "██████╗░░█████╗░███╗░░██╗░█████╗░░█████╗░   ██████╗░███████╗   ░█████╗░██████╗░░█████╗░░█████╗░░█████╗░███╗░░██╗\r\n" + //
@@ -202,7 +204,9 @@ public class Main {
         System.out.println("\b\b\b  ╚════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
     }
 
-    // Menu Functions
+
+    // Menu Functions - handles the menu logic
+
     public static void userMenu(Users activeUser) {
         System.out.println();
         optionsDisplay();
@@ -419,9 +423,13 @@ public class Main {
         }
     }
 
-    // Program Functions
+
+    // Program Functions - functions that handle the program's logic
+
+    // Handles user login, checks if a username exists or not, also checks if a username and a password matches
     public static void login() {
         System.out.println();
+        System.out.println("=================================");
         System.out.print("Enter Username : "); String username = sc.nextLine();
 
         if (Login.checkUsername(username)) {
@@ -440,6 +448,7 @@ public class Main {
         }
     }
 
+    // Handles user creation
     public static void createAccount() {
         int type = 0;
         double deposit = 0;
@@ -447,6 +456,7 @@ public class Main {
         System.out.println();
         createAccountMenu();
 
+        // Gets user input
         System.out.println();
         System.out.println("=================================");
         System.out.println("Please complete the following\n");
@@ -502,6 +512,7 @@ public class Main {
             }
         }
 
+        // Passes acquired input to the customer object
         customer.setFullName(firstName, middleName, lastName);
         customer.setBDay(birthDate);
         customer.setPhoneNumber(phoneNumber);
@@ -510,6 +521,7 @@ public class Main {
         customer.setAccountType(type);
         customer.setBalance(deposit);
 
+        // Adds customer object to the users LinkedList
         users.add(customer);
         CSVHandler.writeUsersToCSV("users.csv", users);
         System.out.println("\nAccount Successfully Created!");
@@ -517,6 +529,7 @@ public class Main {
 
         accountSummaryDisplay();
 
+        // Displays the information of the newly created account
         for (Users temp : users) {
             if (customer.getUserID().equals(temp.getUserID())) {
                 System.out.println();
@@ -534,6 +547,7 @@ public class Main {
         }
     }
 
+    // Checks if a user's initial minimum deposit meets the required amount for the chosen account type
     public static boolean minimumCheck(double deposit, int type) {
         if (type == 1) {
             if (deposit >= 3000) {
@@ -547,6 +561,7 @@ public class Main {
         return true;
     }
 
+    // Checks if the input matches the admin password
     public static boolean adminCheck(String pass) {
         if (pass.equals(admin.getPass())) {
             System.out.println("Logged In!\n");
@@ -556,6 +571,7 @@ public class Main {
         return false;
     }
 
+    // Handles the account searching function
     public static void searchAccount(int option) {
         boolean found = false;
         System.out.println();
@@ -620,6 +636,7 @@ public class Main {
         }
     }
 
+    // Function to display all users
     public static void displayAll() {
         for (Users temp : users) {
             printAccountDetails(temp);
@@ -632,6 +649,7 @@ public class Main {
         }
     }
 
+    // Function to change the admin's password
     public static void changeAdminPass() {
         System.out.println("\nChange Admin Password:");
         while (true) {
@@ -661,6 +679,7 @@ public class Main {
         admin.setPass(pass);
     }
 
+    // Function to delete an individual account using an its account number
     public static void deleteAccount() {
         boolean found = false;
         System.out.print("Enter Account Number Of The Account To Delete: "); String accountNumber = sc.nextLine();
@@ -683,6 +702,7 @@ public class Main {
         }
     }
 
+    // Function to delete all user accounts
     public static void deleteAllAccounts() {
         while (true) {
             System.out.print("Are You Sure You Want To Delete All Accounts? Answer [Y/N] : "); String choice = sc.nextLine();
@@ -714,6 +734,7 @@ public class Main {
         CSVHandler.writeUsersToCSV("users.csv", users);
     }
 
+    // Displays account details for the admin
     public static void printAccountDetails(Users user) {
         System.out.println();
         System.out.println("=================================");
@@ -726,6 +747,7 @@ public class Main {
         System.out.println("Current Balance: " + df.format(user.getBalance()));
     }
     
+    // Displays account details for the user menu
     public static void printUserDetails(Users user) {
         System.out.println("Account Number: " + user.getUserID());
         System.out.println("Account Name: " + user.getFullName());
@@ -733,7 +755,7 @@ public class Main {
         System.out.println("Current Balance: " + df.format(user.getBalance()));
     }
 
-    // Method that iterates through the list of users to find the matching username and returns that users
+    // Iterates through the list of users if a login is successful to find the matching username and returns that user
     public static Users accessUserAccount(String username) {
         Users accessedUser = null;
         for (int i = 0; i < users.size(); i++) {
@@ -747,6 +769,7 @@ public class Main {
         return accessedUser;
     }
 
+    // Handles user deposits
     public static void deposit(Users user) {
         double amount = 0;
         System.out.println();
@@ -771,6 +794,7 @@ public class Main {
         optionsDisplay();
     }
 
+    // Handles user withdrawals
     public static void withdraw(Users user) {
         double amount = 0;
         System.out.println();
@@ -802,6 +826,7 @@ public class Main {
         }
     }
 
+    // Checks if user input only consists of alphabetical characters
     public static String getStringInput(String requirement) {
         String input;
         while (true) {
@@ -815,6 +840,7 @@ public class Main {
         }
     }
 
+    // Checks if user input consists only of numerical digits and is 11 digits long
     public static String getPhoneNumber(String requirement) {
         String input;
         while (true) {
@@ -831,6 +857,7 @@ public class Main {
         }
     }
 
+    // Checks if user input consists only of numerical digits and is 8 digits long
     public static String getBirthDate(String requirement) {
         String input;
         while (true) {
@@ -847,6 +874,7 @@ public class Main {
         }
     }
 
+    // Handles password creation for the users, checks if a password meets the requirements
     public static String getPassword() {
 
 		char [] specialCharacters = {'!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'};
@@ -903,6 +931,7 @@ public class Main {
 	    }
     }
 
+    // Displays birth date in the format: (DD/MM/YYYY)
     public static String displayBirthDate(String birth) {
         StringBuilder birthday = new StringBuilder();
     
@@ -916,6 +945,7 @@ public class Main {
         return birthday.toString();
     }
 
+    // Function in handling the editing of a user's details
     public static void editDetails(Users user, String option) {
         System.out.println();
         
