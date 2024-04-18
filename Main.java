@@ -12,7 +12,6 @@ public class Main {
     static Admin admin = new Admin();
 
     public static void main(String[] args) {
-        users = CSVHandler.readUsersFromCSV("users.csv");
         display();
         main();
     }
@@ -20,6 +19,8 @@ public class Main {
     public static void main() {
 
         while (true) {
+            admin = Admin.readPass("admin.csv");
+            users = CSVHandler.readUsersFromCSV("users.csv");
             customer = new Users(); // Initializes customer object
             System.out.println();
             displayMenu();
@@ -705,6 +706,18 @@ public class Main {
     // Function to delete all user accounts
     public static void deleteAllAccounts() {
         while (true) {
+            System.out.print("Enter Admin Password: "); String confirm = sc.nextLine();
+
+            if (admin.getPass().equals(confirm)) {
+                break;
+            } else {
+                System.out.println("Incorrect. Please Try Again.\n");
+                System.out.println();
+                manageMenu();
+            }
+        }
+
+        while (true) {
             System.out.print("Are You Sure You Want To Delete All Accounts? Answer [Y/N] : "); String choice = sc.nextLine();
 
             if (choice.equalsIgnoreCase("y")) {
@@ -715,16 +728,6 @@ public class Main {
                 manageMenu();
             } else {
                 System.out.println("Invalid Input. Please Try Again.\n");
-            }
-        }
-
-        while (true) {
-            System.out.print("Enter Admin Password: "); String confirm = sc.nextLine();
-
-            if (admin.getPass().equals(confirm)) {
-                break;
-            } else {
-                System.out.println("Incorrect. Please Try Again.\n");
             }
         }
 
