@@ -9,7 +9,7 @@ public class Main {
 
     static LinkedList<Users> users = new LinkedList<>();
     static Users customer;
-    static Admin admin = new Admin();
+    static Admin admin;
 
     public static void main(String[] args) {
         display();
@@ -19,7 +19,7 @@ public class Main {
     public static void main() {
 
         while (true) {
-            admin = Admin.readPass("admin.csv");
+            admin = CSVHandler.readAdminPass("admin.csv");
             users = CSVHandler.readUsersFromCSV("users.csv");
             customer = new Users(); // Initializes customer object
             System.out.println();
@@ -678,6 +678,7 @@ public class Main {
             }
         }
         admin.setPass(pass);
+        CSVHandler.writeAdminPass("admin.csv", admin);
     }
 
     // Function to delete an individual account using an its account number

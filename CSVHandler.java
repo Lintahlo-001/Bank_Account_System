@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class CSVHandler {
+    static Admin admin;
 
     // Method to read users from a CSV file and return a list of Users
     public static LinkedList<Users> readUsersFromCSV(String filename) {
@@ -67,5 +68,26 @@ public class CSVHandler {
                 + "," + user.getBDay() + "," + user.getPhoneNumber() + ","
                 + user.getAddress() + ","
                 + user.getUsername() + "," + user.getPassword() + "," + user.getAccountType() + "," + user.getBalance();
+    }
+
+    // Method to read the currently set admin password
+    public static Admin readAdminPass(String filename) {
+        try (Scanner scanner = new Scanner(new File(filename))) {
+            String pass = scanner.nextLine();
+            admin = new Admin(pass);        
+        } catch (FileNotFoundException e) {
+            System.err.println("CSV file not found: " + filename);
+        }
+
+        return admin;
+    }
+
+    // Method to write the admin password to the Admin CSV file
+    public static void writeAdminPass(String filename, Admin admin) {
+        try (PrintWriter writer = new PrintWriter(new File(filename))) {
+            writer.println(admin.getPass());
+        } catch (FileNotFoundException e) {
+            System.err.println("Error writing to CSV file: " + filename);
+        }
     }
 }
