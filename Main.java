@@ -919,7 +919,7 @@ public class Main {
 				}
 			}
             
-			if (upperCase >= 2 && lowerCase >= 2 && digit >= 2 && length && hasSpecial){
+			if (upperCase >= 2 && lowerCase >= 2 && digit >= 2 && length && hasSpecial) {
 				System.out.print("Re-enter Your password: ");
 				String finalPassword = sc.nextLine();
 
@@ -928,9 +928,9 @@ public class Main {
                     return finalPassword;
 				} else {
 					System.out.print("\nPassword Do Not Match. Please Try Again.\n");
-					}
-				} else {
-					System.out.print("\nPlease Enter A Valid Password.\n");
+				}
+			} else {
+				System.out.print("\nPlease Enter A Valid Password.\n");
 		    }
 	    }
     }
