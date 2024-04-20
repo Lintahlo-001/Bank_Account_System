@@ -40,7 +40,7 @@ public class Main {
                     case 3:
                         System.out.println();
                         System.out.println("=================================");
-                        System.out.print("Enter Password: "); String adminPass = sc.nextLine();
+                        System.out.print("Enter Password: "); String adminPass = sc.nextLine(); // Default Password: admin123
 
                         if (adminCheck(adminPass)) {
                             adminMenu();
@@ -164,13 +164,13 @@ public class Main {
         System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
     }
 
-    public static void accountDetailDisplay(Users user) {
+    public static void accountDetailDisplay(Users user, String pass) {
         System.out.println("\t\t\t\t\t\b\b\b╔════════════════════════════╗");
         System.out.println("\t\t\t\t\t\b\b\b║       Account Details      ║");
         System.out.println("\t\t\t\t\t\b\b\b╚════════════════════════════╝");
         System.out.println("\t\t\t\t\t\b\b\bAccount Name: " + user.getFullName());
         System.out.println("\t\t\t\t\t\b\b\bUsername: " + user.getUsername());
-        System.out.println("\t\t\t\t\t\b\b\bPassword: " + user.getPassword());
+        System.out.println("\t\t\t\t\t\b\b\bPassword: " + pass);
         System.out.println("\t\t\t\t\t\b\b\bBirth Date: " + displayBirthDate(user.getBDay()));
         System.out.println("\t\t\t\t\t\b\b\bPhone Number: " + user.getPhoneNumber());
         System.out.println("\t\t\t\t\t\b\b\bAddress: " + user.getAddress());
@@ -207,7 +207,7 @@ public class Main {
 
     // Menu Functions - handles the menu logic
 
-    public static void userMenu(Users activeUser) {
+    public static void userMenu(Users activeUser, String pass) {
         System.out.println();
         optionsDisplay();
         System.out.println("\t\t\t\t\t\b\b\bWelcome, " + activeUser.getUsername() + "!");
@@ -230,7 +230,7 @@ public class Main {
                         break;
                     case 3:
                         System.out.println();
-                        detailsMenu(activeUser);
+                        detailsMenu(activeUser, pass);
                     case 4:
                         main();
                         break;
@@ -245,9 +245,9 @@ public class Main {
         }
     }
     
-    public static void detailsMenu(Users user) {
+    public static void detailsMenu(Users user, String pass) {
         while (true) {
-            accountDetailDisplay(user);
+            accountDetailDisplay(user, pass);
             System.out.println();
             System.out.println("=================================");
 
@@ -258,10 +258,10 @@ public class Main {
 
                     case 1:
                         System.out.println();
-                        editMenu(user);
+                        editMenu(user, pass);
                         break;
                     case 2:
-                        userMenu(user);
+                        userMenu(user, pass);
                         break;
                     default:
                         System.out.println("\nInvalid Choice. Enter a number from 1-2.\n");
@@ -273,7 +273,7 @@ public class Main {
         }
     }
 
-    public static void editMenu(Users user) {
+    public static void editMenu(Users user, String pass) {
         while (true) {
             editDetailsDisplay();
             System.out.println();
@@ -304,7 +304,7 @@ public class Main {
                         break;
                     case 7:
                         System.out.println();
-                        detailsMenu(user);
+                        detailsMenu(user, pass);
                     default:
                         System.out.println("\nInvalid Choice. Enter a number from 1-7.\n");
                 }
@@ -435,9 +435,9 @@ public class Main {
         if (Login.checkUsername(username)) {
             System.out.print("Enter Password : "); String password = sc.nextLine();
 
-            if (Login.checkPassword(username, password)) {
+            if (Login.checkPassword(username, PassHasher.encryptPass(password))) {
                 Users accessedUser = accessUserAccount(username);
-                userMenu(accessedUser);
+                userMenu(accessedUser, password);
             }
             else {
                 System.out.println("Incorrect Password.");
@@ -518,7 +518,7 @@ public class Main {
         customer.setBDay(birthDate);
         customer.setPhoneNumber(phoneNumber);
         customer.setAddress(address);
-        customer.setPassword(pass);
+        customer.setPassword(PassHasher.encryptPass(pass));
         customer.setAccountType(type);
         customer.setBalance(deposit);
 
@@ -537,7 +537,7 @@ public class Main {
                 System.out.println("\t\t\t\t\t\b\b\bAccount Number: " + temp.getUserID());
                 System.out.println("\t\t\t\t\t\b\b\bAccount Name: " + temp.getFullName());
                 System.out.println("\t\t\t\t\t\b\b\bUsername: " + temp.getUsername());
-                System.out.println("\t\t\t\t\t\b\b\bPassword: " + temp.getPassword());
+                System.out.println("\t\t\t\t\t\b\b\bPassword: " + pass);
                 System.out.println("\t\t\t\t\t\b\b\bBirth Date: " + displayBirthDate(temp.getBDay()));
                 System.out.println("\t\t\t\t\t\b\b\bPhone Number: " + temp.getPhoneNumber());
                 System.out.println("\t\t\t\t\t\b\b\bAddress: " + temp.getAddress());
@@ -935,7 +935,7 @@ public class Main {
 	    }
     }
 
-    // Displays birth date in the format: (DD/MM/YYYY)
+    // Returns the birth date in the format: DD/MM/YYYY
     public static String displayBirthDate(String birth) {
         StringBuilder birthday = new StringBuilder();
     
@@ -975,8 +975,11 @@ public class Main {
             System.out.println(option + " Changed Successfully!");
         } else if (option.equals("Password")) {
             String pass = getPassword();
-            user.setPassword(pass);
+            user.setPassword(PassHasher.encryptPass(pass));
             System.out.println(option + " Changed Successfully!");
+            CSVHandler.writeUsersToCSV("users.csv", users);
+            editMenu(user, pass);
+            System.out.println();
         } else if (option.equals("Birth Date")) {
             System.out.print("Enter Birth Date (DD/MM/YYYY): "); String birthDate = getBirthDate("Birth Date");
             user.setBDay(birthDate);
