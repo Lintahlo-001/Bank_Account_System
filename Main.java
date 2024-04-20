@@ -21,7 +21,6 @@ public class Main {
         while (true) {
             admin = CSVHandler.readAdminPass("admin.csv");
             users = CSVHandler.readUsersFromCSV("users.csv");
-            customer = new Users(); // Initializes customer object
             System.out.println();
             displayMenu();
 
@@ -451,6 +450,7 @@ public class Main {
 
     // Handles user creation
     public static void createAccount() {
+        customer = new Users();
         int type = 0;
         double deposit = 0;
         boolean insufficient = true;
